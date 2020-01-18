@@ -29,8 +29,6 @@ public class Number {
 		}
 
 		int sum = divisors.stream().collect(Collectors.summingInt(Integer::intValue));
-		System.out.println("SUM: "+sum);
-		System.out.println("value: "+this.value);
 		return this.value == sum;
 	}
 }

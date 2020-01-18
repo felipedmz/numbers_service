@@ -61,6 +61,7 @@ public class NumberControllerTests {
 			.andExpect(jsonPath("$.perfect").value("false"));
 	}
 
+	@Test
 	public void isPerfectFalse() throws Exception {
 		this.mockMvc.perform(get("/check/8"))
 			.andDo(print()).andExpect(status().isOk())
@@ -73,13 +74,9 @@ public class NumberControllerTests {
 		this.mockMvc.perform(get("/check/50135"))
 			.andDo(print()).andExpect(status().isOk())
 			.andExpect(jsonPath("$.perfect").value("false"));
-
-		this.mockMvc.perform(get("/check/21011991"))
-			.andDo(print()).andExpect(status().isOk())
-			.andExpect(jsonPath("$.perfect").value("false"));
 	}
 
-
+	@Test
 	public void isPerfectTrue() throws Exception {
 		this.mockMvc.perform(get("/check/6"))
 			.andDo(print()).andExpect(status().isOk())
@@ -96,19 +93,6 @@ public class NumberControllerTests {
 		this.mockMvc.perform(get("/check/8128"))
 			.andDo(print()).andExpect(status().isOk())
 			.andExpect(jsonPath("$.perfect").value("true"));
-
-		this.mockMvc.perform(get("/check/137438691328"))
-			.andDo(print()).andExpect(status().isOk())
-			.andExpect(jsonPath("$.perfect").value("false"));
 	}
-
-
-	/*@Test
-	public void paramGreetingShouldReturnTailoredMessage() throws Exception {
-
-		this.mockMvc.perform(get("/greeting").param("name", "Spring Community"))
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(jsonPath("$.content").value("Hello, Spring Community!"));
-	}*/
 
 }

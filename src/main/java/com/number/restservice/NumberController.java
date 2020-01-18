@@ -20,7 +20,7 @@ public class NumberController {
 		try {
 			return new ResponseEntity<>(new Number(Integer.parseInt(value)), HttpStatus.OK);
 		} catch (NumberFormatException e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Enter a positive integer.", e);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Enter a valid integer.", e);
 		}
 	}
 
