@@ -1,19 +1,29 @@
 package com.number.restservice;
 
-import java.util.concurrent.atomic.AtomicLong;
+import java.math.BigInteger;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class NumberController {
 
-	private static final String template = "Hello, %s!";
-	private final AtomicLong counter = new AtomicLong();
+	/*@PostMapping("/check")
+	public BigInteger check(@RequestBody Number numberToCheck) {
+		return numberToCheck.getValue();
+	}*/
 
-	@GetMapping("/greeting")
-	public Number greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return new Number(counter.incrementAndGet(), String.format(template, name));
+	@GetMapping("/check/{value}")
+	public ResponseEntity<Number> isPerfectNumber(@PathVariable String value) {
+		try {
+			return new ResponseEntity<Number>(new Number(new BigInteger(value)), HttpStatus.OK);
+		} catch (NumberFormatException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Enter a positive integer.", e);
+		}
 	}
+
 }

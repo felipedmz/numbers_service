@@ -35,18 +35,80 @@ public class NumberControllerTests {
 	private MockMvc mockMvc;
 
 	@Test
-	public void noParamGreetingShouldReturnDefaultMessage() throws Exception {
+	public void isPerfectInvalidEntries() throws Exception {
+		this.mockMvc.perform(get("/check/aaaa"))
+			.andDo(print()).andExpect(status().isBadRequest());
 
-		this.mockMvc.perform(get("/greeting")).andDo(print()).andExpect(status().isOk())
-				.andExpect(jsonPath("$.content").value("Hello, World!"));
+		this.mockMvc.perform(get("/check/6.1"))
+			.andDo(print()).andExpect(status().isBadRequest());
+
+		this.mockMvc.perform(get("/check/6,2"))
+			.andDo(print()).andExpect(status().isBadRequest());
 	}
 
 	@Test
+	public void isPerfectNonNaturalNumbers() throws Exception {
+		this.mockMvc.perform(get("/check/-50"))
+			.andDo(print()).andExpect(status().isOk())
+			.andExpect(jsonPath("$.perfect").value("false"));
+
+		this.mockMvc.perform(get("/check/-1"))
+			.andDo(print()).andExpect(status().isOk())
+			.andExpect(jsonPath("$.perfect").value("false"));
+
+		this.mockMvc.perform(get("/check/0"))
+			.andDo(print()).andExpect(status().isOk())
+			.andExpect(jsonPath("$.perfect").value("false"));
+	}
+
+	public void isPerfectFalse() throws Exception {
+		this.mockMvc.perform(get("/check/8"))
+			.andDo(print()).andExpect(status().isOk())
+			.andExpect(jsonPath("$.perfect").value("false"));
+
+		this.mockMvc.perform(get("/check/42"))
+			.andDo(print()).andExpect(status().isOk())
+			.andExpect(jsonPath("$.perfect").value("false"));
+
+		this.mockMvc.perform(get("/check/50135"))
+			.andDo(print()).andExpect(status().isOk())
+			.andExpect(jsonPath("$.perfect").value("false"));
+
+		this.mockMvc.perform(get("/check/21011991"))
+			.andDo(print()).andExpect(status().isOk())
+			.andExpect(jsonPath("$.perfect").value("false"));
+	}
+
+
+	public void isPerfectTrue() throws Exception {
+		this.mockMvc.perform(get("/check/6"))
+			.andDo(print()).andExpect(status().isOk())
+			.andExpect(jsonPath("$.perfect").value("true"));
+
+		this.mockMvc.perform(get("/check/28"))
+			.andDo(print()).andExpect(status().isOk())
+			.andExpect(jsonPath("$.perfect").value("true"));
+
+		this.mockMvc.perform(get("/check/496"))
+			.andDo(print()).andExpect(status().isOk())
+			.andExpect(jsonPath("$.perfect").value("true"));
+
+		this.mockMvc.perform(get("/check/8128"))
+			.andDo(print()).andExpect(status().isOk())
+			.andExpect(jsonPath("$.perfect").value("true"));
+
+		this.mockMvc.perform(get("/check/137438691328"))
+			.andDo(print()).andExpect(status().isOk())
+			.andExpect(jsonPath("$.perfect").value("true"));
+	}
+
+
+	/*@Test
 	public void paramGreetingShouldReturnTailoredMessage() throws Exception {
 
 		this.mockMvc.perform(get("/greeting").param("name", "Spring Community"))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(jsonPath("$.content").value("Hello, Spring Community!"));
-	}
+	}*/
 
 }

@@ -1,4 +1,4 @@
-# 1. Check if a given number is perfect
+# 2. Find all perfect numbers between a range (start-end)
 curl -X POST \
 -H "Content-Type: application/json" \
 -d '{}'
