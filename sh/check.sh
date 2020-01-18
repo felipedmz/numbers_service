@@ -1,4 +1,5 @@
 # 1. Check if a given number is perfect
+
 echo "\n"
 curl http://localhost:8080/check/-1
 echo "\n"
