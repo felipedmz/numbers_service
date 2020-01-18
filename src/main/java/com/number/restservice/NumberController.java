@@ -20,8 +20,13 @@ public class NumberController {
 	@RequestMapping(value = "/find", method =  RequestMethod.POST)
     public ResponseEntity<ArrayList> Post(@Valid @RequestBody Interval interval)
     {
-        return new ResponseEntity<ArrayList>(interval.findPerfectNumbers(), HttpStatus.OK);
-    }
+		try {
+			return new ResponseEntity<ArrayList>(interval.findPerfectNumbers(), HttpStatus.OK);
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Enter a valid integer.", e);
+		}
+	}
+
 
 	@GetMapping("/check/{value}")
 	public ResponseEntity<Number> isPerfectNumber(@PathVariable String value) {
