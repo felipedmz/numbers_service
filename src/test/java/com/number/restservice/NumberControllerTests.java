@@ -99,7 +99,7 @@ public class NumberControllerTests {
 
 		this.mockMvc.perform(get("/check/137438691328"))
 			.andDo(print()).andExpect(status().isOk())
-			.andExpect(jsonPath("$.perfect").value("true"));
+			.andExpect(jsonPath("$.perfect").value("false"));
 	}
 
 

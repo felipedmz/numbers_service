@@ -1,39 +1,36 @@
 package com.number.restservice;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class Number {
 
-	private final BigInteger value;
+	private int value;
 
-	public Number(final BigInteger value) {
+	public Number(int value) {
 		this.value = value;
 	}
 
-	public BigInteger getValue() {
+	public int getValue() {
 		return this.value;
 	}
 
 	public boolean isPerfect() {
-		final BigInteger two = new BigInteger("2");
-
-		if (this.value.compareTo(BigInteger.ONE) == -1 )
+		if (this.value < 1)
 			return false;
-		if (this.value.mod(two).compareTo(BigInteger.ZERO) == 1)
+		if (this.value % 2 > 0)
 			return false;
 		
-		final ArrayList<Integer> divisors = new ArrayList<Integer>();
-		
-		for (final BigInteger i = this.value; i.compareTo(BigInteger.ZERO) == 1; i.subtract(BigInteger.ONE)) {
-			if (this.value.mod(i).compareTo(BigInteger.ZERO) == 0)
-				divisors.add(i.intValue());
+		ArrayList<Integer> divisors = new ArrayList<Integer>();
+		for (int i = this.value - 1; i > 0; i--) {
+			if (this.value % i == 0) {
+				divisors.add(i);
+			}
 		}
 
-		final int sum = divisors.stream()
-			.collect(Collectors.summingInt(Integer::intValue));
-
-		return this.value.equals(sum);
+		int sum = divisors.stream().collect(Collectors.summingInt(Integer::intValue));
+		System.out.println("SUM: "+sum);
+		System.out.println("value: "+this.value);
+		return this.value == sum;
 	}
 }
