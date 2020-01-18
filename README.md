@@ -15,7 +15,7 @@ In project root folder:
 $ sh sh/run.sh
 ```
 
-*2.* Go to another terminal to perform given requests:
+*2.* Go to another terminal to perform the given requests. ([byobu recommended](https://help.ubuntu.com/lts/serverguide/byobu.html))
 
 - Check if a given number is perfect
 
