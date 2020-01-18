@@ -2,14 +2,13 @@ package com.number.restservice;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class Number {
 
-	private BigInteger value;
+	private final BigInteger value;
 
-	public Number(BigInteger value) {
+	public Number(final BigInteger value) {
 		this.value = value;
 	}
 
@@ -18,23 +17,22 @@ public class Number {
 	}
 
 	public boolean isPerfect() {
-		BigInteger two = new BigInteger("2");
+		final BigInteger two = new BigInteger("2");
 
 		if (this.value.compareTo(BigInteger.ONE) == -1 )
 			return false;
 		if (this.value.mod(two).compareTo(BigInteger.ZERO) == 1)
 			return false;
 		
-		ArrayList<BigInteger> divisors = new ArrayList<BigInteger>();
+		final ArrayList<Integer> divisors = new ArrayList<Integer>();
 		
-		for (BigInteger i = this.value; i.compareTo(BigInteger.ZERO) == 1; i.subtract(BigInteger.ONE)) {
+		for (final BigInteger i = this.value; i.compareTo(BigInteger.ZERO) == 1; i.subtract(BigInteger.ONE)) {
 			if (this.value.mod(i).compareTo(BigInteger.ZERO) == 0)
-				divisors.add(i);
+				divisors.add(i.intValue());
 		}
 
-		int sum = divisors.stream()
-			.mapToInt(BigInteger::intValue)
-			.sum();
+		final int sum = divisors.stream()
+			.collect(Collectors.summingInt(Integer::intValue));
 
 		return this.value.equals(sum);
 	}
