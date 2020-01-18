@@ -1,0 +1,8 @@
+.gradle/
+.mvn/
+.settings/
+.classpath/
+.project/
+.bat/
+.cmd/
+build/
