@@ -5,4 +5,9 @@
 .project/
 .bat/
 .cmd/
+.vscode/
+*.bat
+*.cmd
+*.log
 build/
+gradle/
