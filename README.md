@@ -1,3 +1,8 @@
+# Features
+
+1. Check if a given number is perfect
+2. Find all perfect numbers between a range
+
 # Development Environment
 
 - Ubuntu 18.04 LTS
@@ -5,7 +10,7 @@
 - Gradle 6.1
 - Spring Boot 2.2.0
 
-# Instructions
+# How-to
 
 In project root folder:
 
