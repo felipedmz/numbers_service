@@ -7,7 +7,7 @@ public class Interval {
     private Number start;
     private Number end;
 
-	public Interval(Number start, Number end) {
+    public Interval(Number start, Number end) {
         this.start = start;
         this.end = end;
     }
